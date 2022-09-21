@@ -32,13 +32,13 @@ export default function Header() {
         author: "Robertao",
         category: "categoria10",
         textContent: "fera demais,conteudoo",
-        id: 7,
-        filename: "nome diferente tlg",
-        url: "url diferente tlg",
+        id: "10",
+        // filename: "nome diferente tlg",
+        // url: "url diferente tlg",
     };
 
     function deletePost(post) {
-        axios.delete("/posts", yu).then((response) => console.log(response));
+        axios.delete(`/posts/${10}`).then((response) => console.log(response));
     }
     return (
         <>

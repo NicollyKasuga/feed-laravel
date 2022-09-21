@@ -5484,13 +5484,13 @@ function Header() {
     author: "Robertao",
     category: "categoria10",
     textContent: "fera demais,conteudoo",
-    id: 7,
-    filename: "nome diferente tlg",
-    url: "url diferente tlg"
+    id: "10" // filename: "nome diferente tlg",
+    // url: "url diferente tlg",
+
   };
 
   function deletePost(post) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("/posts", yu).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("/posts/".concat(10)).then(function (response) {
       return console.log(response);
     });
   }

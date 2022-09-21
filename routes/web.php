@@ -24,4 +24,4 @@ Route::post('/posts', [PostController::class, 'create']);
 
 Route::patch('/posts', [PostController::class, 'update']);
 
-Route::delete('/posts', [PostController::class, 'delete']);
+Route::delete('/posts/{id}', [PostController::class, 'destroy']);

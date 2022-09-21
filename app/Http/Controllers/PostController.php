@@ -62,8 +62,16 @@ class PostController extends Controller
         return "Post was updated";
     }
 
-    public function delete(Post $post)
+    public function destroy( $id)
     {
+        try{
+            $result = Post::where('id', $id)->first()->delete();
 
+            return '';
+        }
+        catch(Exception $e){
+            Log::error($e);
+
+        }
     }
 };
