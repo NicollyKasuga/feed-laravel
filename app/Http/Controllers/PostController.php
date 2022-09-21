@@ -25,6 +25,18 @@ class PostController extends Controller
     public function create(Request $request)
     {
 
+        $image = $request->except('author', 'category', 'textContent');
+        $postContent = $request->except('filename', 'url');
+
+        $newPost = Post::create($postContent);
+        if(!empty($image['filename'])){
+            $newMidia = $newPost->midia()->create([
+            'filename' => $image['filename'],
+            'url' =>$image['url'],
+            'post_id' =>$newPost['id']
+            ]);
+        };
+
     }
 
     public function edit(Post $post)
