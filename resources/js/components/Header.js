@@ -14,10 +14,38 @@ export default function Header() {
             })
             .then((response) => console.log(response));
     }
+
+    function updatePost() {
+        axios
+            .patch("/posts", {
+                author: "Robertao",
+                category: "categoria10",
+                textContent: "fera demais,conteudoo",
+                id: 7,
+                filename: "nome diferente tlg",
+                url: "url diferente tlg",
+            })
+            .then((response) => console.log(response));
+    }
+
+    let yu = {
+        author: "Robertao",
+        category: "categoria10",
+        textContent: "fera demais,conteudoo",
+        id: 7,
+        filename: "nome diferente tlg",
+        url: "url diferente tlg",
+    };
+
+    function deletePost(post) {
+        axios.delete("/posts", yu).then((response) => console.log(response));
+    }
     return (
         <>
             <h1>header</h1>
-            <button onClick={() => createPost()}>APERTA AQUI</button>
+            <button onClick={() => createPost()}>Criar</button>
+            <button onClick={() => updatePost()}>Atualizar</button>
+            <button onClick={() => deletePost()}>Deletar</button>
         </>
     );
 }

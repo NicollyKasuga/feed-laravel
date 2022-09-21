@@ -5467,6 +5467,34 @@ function Header() {
     });
   }
 
+  function updatePost() {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().patch("/posts", {
+      author: "Robertao",
+      category: "categoria10",
+      textContent: "fera demais,conteudoo",
+      id: 7,
+      filename: "nome diferente tlg",
+      url: "url diferente tlg"
+    }).then(function (response) {
+      return console.log(response);
+    });
+  }
+
+  var yu = {
+    author: "Robertao",
+    category: "categoria10",
+    textContent: "fera demais,conteudoo",
+    id: 7,
+    filename: "nome diferente tlg",
+    url: "url diferente tlg"
+  };
+
+  function deletePost(post) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("/posts", yu).then(function (response) {
+      return console.log(response);
+    });
+  }
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
       children: "header"
@@ -5474,7 +5502,17 @@ function Header() {
       onClick: function onClick() {
         return createPost();
       },
-      children: "APERTA AQUI"
+      children: "Criar"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+      onClick: function onClick() {
+        return updatePost();
+      },
+      children: "Atualizar"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+      onClick: function onClick() {
+        return deletePost();
+      },
+      children: "Deletar"
     })]
   });
 }
