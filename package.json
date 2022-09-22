@@ -24,6 +24,9 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "react-icons": "^4.4.0"
+        "@hookform/resolvers": "^2.9.8",
+        "react-hook-form": "^7.36.0",
+        "react-icons": "^4.4.0",
+        "yup": "^0.32.11"
     }
 }
