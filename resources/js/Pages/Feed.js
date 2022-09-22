@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import Header from "../components/Header";
+import NavBar from "../components/NavBar";
+import Posts from "../components/Posts";
 
 export default function Feed() {
     useEffect(() => {
@@ -12,7 +13,8 @@ export default function Feed() {
 
     return (
         <>
-            <Header />
+            <NavBar />
+            <Posts />
         </>
     );
 }
