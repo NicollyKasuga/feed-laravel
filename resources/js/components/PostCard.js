@@ -43,7 +43,6 @@ export default function PostCard() {
     }
 
     function deleteData(id) {
-        console.log(deleteModal);
         let tempData = [id];
         setTempdata((item) => [1, ...tempData]);
         setDeleteModal(!deleteModal);
