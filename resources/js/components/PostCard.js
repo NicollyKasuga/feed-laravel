@@ -55,7 +55,9 @@ export default function PostCard() {
                     <div className="d-flex justify-content-between">
                         <div className="d-flex">
                             <img
-                                src="https://source.unsplash.com/collection/happy-people"
+                                src={`https://source.unsplash.com/random/${Math.floor(
+                                    Math.random() * 1000
+                                )}`}
                                 alt="avatar"
                                 className="rounded-circle me-2 ms-2"
                                 style={{
@@ -153,7 +155,9 @@ export default function PostCard() {
                         )}
                         <img
                             className="rounded img-fluid"
-                            src="https://source.unsplash.com/collection/happy-people"
+                            src={`https://source.unsplash.com/random/${Math.floor(
+                                Math.random() * 1000
+                            )}`}
                             alt="image-post"
                             style={{
                                 width: 100 + "%",
