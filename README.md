@@ -1,4 +1,4 @@
-# Ping CRM React
+# Feed LinkLei
 
 Uma demo de um Feed, utilizando Laravel e React.js
 
