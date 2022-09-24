@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Midia;
 use App\Models\Post;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -42,6 +41,8 @@ class PostController extends Controller
                 'post_id' =>$newPost['id']
                 ]);
             };
+
+            return 'Post criado com sucesso!';
     
         }catch(Exception $e){
             Log::error($e);
@@ -52,18 +53,15 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            // 1-  Post::findOrFail($id)->update($request->all());
 
-            // 2-
-            $post = Post::find(23);
+            $post = Post::find($id);
             $post->author = $request->input('author');
             $post->category = $request->input('category');
             $post->textContent = $request->input('textContent');
-            // $post->update();
 
             $post->save();
 
-            return "Agora foi?";
+            return "Post atualizado com sucesso!";
 
 
         }catch(Exception $e){
@@ -74,9 +72,9 @@ class PostController extends Controller
     public function destroy( $id)
     {
         try{
-            $result = Post::where('id', $id)->first()->delete();
+            Post::where('id', $id)->first()->delete();
 
-            return '';
+            return 'Post deletado com sucesso!';
         }
         catch(Exception $e){
             Log::error($e);
