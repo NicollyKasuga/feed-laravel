@@ -56,7 +56,7 @@ export default function NavBar() {
                                     >
                                         <FiSearch className="fas fa-search me-2 text-muted" />
                                         <p className="m-0 fs-7 text-muted">
-                                            Search Flexbook
+                                            Search on LinkLei
                                         </p>
                                     </div>
                                 </span>
