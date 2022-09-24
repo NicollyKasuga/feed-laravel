@@ -11,6 +11,8 @@ class Post extends Model
 
     protected $fillable = [ 'author', 'category','textContent'];
 
+    protected $guarded = [];
+
     public function midia(){
         return $this->hasOne(Midia::class);
     }

@@ -49,26 +49,21 @@ class PostController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function update(Post $request, $id)
     {
-        $image = $request->except('author', 'category', 'textContent','id');
-        $postContent = $request->except('filename', 'url');
+        try{
+            $post = Post::find($id);
+            $post->author = $request->input('edit_author');
+            $post->category = $request->input('edit_category');
+            $post->textContent = $request->input('edit_textContent');
+            $post->save();
 
-        $updatedPost = Post::where('id', $postContent['id'])->update([
-            'author' => $postContent['author'],
-            'category' => $postContent['category'],
-            'textContent' => $postContent['textContent']
-        ]);
 
-        if (!empty($image['filename']) && !empty($image['url']))
-        {
-            Midia::where('post_id', $postContent['id'])->update([
-                'filename' => $image['filename'],
-                'url' => $image['url']
-            ]);
-        };
-        
-        return "Post was updated";
+        }catch(Exception $e){
+            Log::error($e);
+        }
+
+          
     }
 
     public function destroy( $id)

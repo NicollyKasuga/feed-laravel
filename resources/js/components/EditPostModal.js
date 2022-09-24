@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { RiEdit2Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-export default function EditPostModal() {
+export default function EditPostModal(props) {
     const editPostSchema = yup.object().shape({
         edit_author: yup.string(),
         edit_category: yup.string(),
@@ -18,46 +17,29 @@ export default function EditPostModal() {
         register: registerEdit,
         handleSubmit: handleUpdatePost,
         formState: { errors: errorsEditPost },
-        // reset: resetEditPost,
     } = useForm({ resolver: yupResolver(editPostSchema) });
 
     function updatePost(data) {
-        let id =
-            document.getElementById("editButtonModal").previousElementSibling
-                .id;
-        console.log(id);
         let dataToUpdate = {};
         for (let [key, value] of Object.entries(data)) {
-            if (value !== "" && key !== "edit_file") {
+            if (key !== "edit_file") {
                 dataToUpdate[key] = value;
             }
         }
+        axios.patch(`/posts/${props.id}`, dataToUpdate).then((response) => {
+            toast.success("Post editado com sucesso!"),
+                console.log(response),
+                console.log(dataToUpdate);
+        });
+        props.hide();
     }
 
     return (
         <>
-            <button
-                type="button"
-                className="border-0 bg-white"
-                style={{
-                    color: "gray",
-                    height: 25 + "px",
-                }}
-                data-bs-toggle="modal"
-                data-bs-target={`#exampleModal`}
-                id="editButtonModal"
-            >
-                <RiEdit2Line
-                    style={{
-                        height: 18 + "px",
-                        width: 25 + "px",
-                    }}
-                />
-            </button>
-
             <div
-                className="modal fade"
-                id={`exampleModal`}
+                className="modal show fade"
+                style={{ display: "block", backgroundColor: "#000000cf" }}
+                id="exampleModal"
                 tabIndex="-1"
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
@@ -65,15 +47,12 @@ export default function EditPostModal() {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">
-                                Editar post
-                            </h5>
+                            <h5 className="modal-title">Editar post</h5>
                             <button
                                 type="button"
                                 className="btn-close"
                                 id="closeEditModal"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
+                                onClick={props.hide}
                             ></button>
                         </div>
                         <form onSubmit={handleUpdatePost(updatePost)}>
@@ -85,6 +64,7 @@ export default function EditPostModal() {
                                         className="form-control"
                                         id="author"
                                         {...registerEdit("edit_author")}
+                                        defaultValue={props.author}
                                     />
                                     <p
                                         className="text-danger"
@@ -103,6 +83,7 @@ export default function EditPostModal() {
                                         className="form-select"
                                         id="inputGroupSelect01"
                                         {...registerEdit("edit_category")}
+                                        defaultValue={props.category}
                                     >
                                         <option defaultValue="Post">
                                             Post
@@ -128,6 +109,7 @@ export default function EditPostModal() {
                                         id="exampleFormControlTextarea1"
                                         rows="3"
                                         {...registerEdit("edit_textContent")}
+                                        defaultValue={props.textContent}
                                     ></textarea>
                                     <p
                                         className="text-danger"

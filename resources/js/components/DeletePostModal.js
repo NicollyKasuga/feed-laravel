@@ -1,31 +1,20 @@
+import axios from "axios";
 import React from "react";
-import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
 
-export default function DeletePostModal() {
-    function deleteUserPost() {}
+export default function DeletePostModal(props) {
+    function deletePost() {
+        axios
+            .delete(`/posts/${props.id}`)
+            .then((response) => toast.success("Post deletado com sucesso!"));
+        props.hide();
+    }
 
     return (
         <>
-            <button
-                type="button"
-                className="border-0 bg-white"
-                style={{
-                    color: "gray",
-                    height: 25 + "px",
-                }}
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal2"
-            >
-                <MdDelete
-                    style={{
-                        height: 18 + "px",
-                        width: 25 + "px",
-                    }}
-                />
-            </button>
-
             <div
-                className="modal fade"
+                className="modal show fade"
+                style={{ display: "block", backgroundColor: "#000000cf" }}
                 id="exampleModal2"
                 tabIndex="-1"
                 aria-labelledby="exampleModalLabel2"
@@ -34,14 +23,11 @@ export default function DeletePostModal() {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel2">
-                                Deletar Post
-                            </h5>
+                            <h5 className="modal-title">Deletar Post</h5>
                             <button
                                 type="button"
                                 className="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
+                                onClick={props.hide}
                             ></button>
                         </div>
                         <div className="modal-body">
@@ -51,14 +37,14 @@ export default function DeletePostModal() {
                             <button
                                 type="button"
                                 className="btn btn-secondary"
-                                data-bs-dismiss="modal"
+                                onClick={props.hide}
                             >
                                 Não
                             </button>
                             <button
                                 type="button"
                                 className="btn btn-danger"
-                                data-bs-dismiss="modal"
+                                onClick={() => deletePost()}
                             >
                                 Sim
                             </button>

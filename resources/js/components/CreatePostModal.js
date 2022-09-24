@@ -30,7 +30,6 @@ export default function CreatePostModal() {
         register: registerCreate,
         handleSubmit: handleCreatePost,
         formState: { errors: errorsCreatePost },
-        // reset: resetCreatePost,
     } = useForm({ resolver: yupResolver(createPostSchema) });
 
     return (
@@ -42,7 +41,7 @@ export default function CreatePostModal() {
                 id="createbuttonModal"
                 data-bs-target="#exampleModal3"
             >
-                Post
+                Criar Post
             </button>
 
             <div
@@ -56,7 +55,7 @@ export default function CreatePostModal() {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel3">
-                                Create Post
+                                Criar Post
                             </h5>
                             <button
                                 type="button"
