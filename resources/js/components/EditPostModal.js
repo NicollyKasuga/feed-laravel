@@ -7,10 +7,10 @@ import axios from "axios";
 
 export default function EditPostModal(props) {
     const editPostSchema = yup.object().shape({
-        edit_author: yup.string(),
-        edit_category: yup.string(),
-        edit_textContent: yup.string(),
-        edit_file: yup.mixed(),
+        author: yup.string(),
+        category: yup.string(),
+        textContent: yup.string(),
+        file: yup.mixed(),
     });
 
     const {
@@ -22,15 +22,21 @@ export default function EditPostModal(props) {
     function updatePost(data) {
         let dataToUpdate = {};
         for (let [key, value] of Object.entries(data)) {
-            if (key !== "edit_file") {
+            if (key !== "file") {
                 dataToUpdate[key] = value;
             }
         }
-        axios.patch(`/posts/${props.id}`, dataToUpdate).then((response) => {
-            toast.success("Post editado com sucesso!"),
-                console.log(response),
-                console.log(dataToUpdate);
-        });
+        axios
+            .patch(`/posts/${props.id}`, {
+                author: data.author,
+                category: data.category,
+                textContent: data.textContent,
+            })
+            .then((response) => {
+                toast.success("Post editado com sucesso!"),
+                    console.log(response),
+                    console.log(dataToUpdate);
+            });
         props.hide();
     }
 
@@ -63,7 +69,7 @@ export default function EditPostModal(props) {
                                         type="text"
                                         className="form-control"
                                         id="author"
-                                        {...registerEdit("edit_author")}
+                                        {...registerEdit("author")}
                                         defaultValue={props.author}
                                     />
                                     <p
@@ -72,7 +78,7 @@ export default function EditPostModal(props) {
                                             height: 24 + "px",
                                         }}
                                     >
-                                        {errorsEditPost.edit_author?.message}
+                                        {errorsEditPost.author?.message}
                                     </p>
                                 </div>
                                 <div className="input-group mb-3">
@@ -82,7 +88,7 @@ export default function EditPostModal(props) {
                                     <select
                                         className="form-select"
                                         id="inputGroupSelect01"
-                                        {...registerEdit("edit_category")}
+                                        {...registerEdit("category")}
                                         defaultValue={props.category}
                                     >
                                         <option defaultValue="Post">
@@ -96,7 +102,7 @@ export default function EditPostModal(props) {
                                         </option>
                                     </select>
                                     <p className="text-danger">
-                                        {errorsEditPost.edit_category?.message}
+                                        {errorsEditPost.category?.message}
                                     </p>
                                 </div>
 
@@ -108,7 +114,7 @@ export default function EditPostModal(props) {
                                         className="form-control"
                                         id="exampleFormControlTextarea1"
                                         rows="3"
-                                        {...registerEdit("edit_textContent")}
+                                        {...registerEdit("textContent")}
                                         defaultValue={props.textContent}
                                     ></textarea>
                                     <p
@@ -117,10 +123,7 @@ export default function EditPostModal(props) {
                                             height: 24 + "px",
                                         }}
                                     >
-                                        {
-                                            errorsEditPost.edit_textContent
-                                                ?.message
-                                        }
+                                        {errorsEditPost.textContent?.message}
                                     </p>
                                 </div>
                                 <div className="input-group mb-3">
@@ -131,7 +134,7 @@ export default function EditPostModal(props) {
                                         type="file"
                                         className="form-control"
                                         id="inputGroupFile01"
-                                        {...registerEdit("edit_file")}
+                                        {...registerEdit("file")}
                                     />
                                 </div>
                             </div>

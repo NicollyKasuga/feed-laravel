@@ -49,21 +49,26 @@ class PostController extends Controller
 
     }
 
-    public function update(Post $request, $id)
+    public function update(Request $request, $id)
     {
         try{
-            $post = Post::find($id);
-            $post->author = $request->input('edit_author');
-            $post->category = $request->input('edit_category');
-            $post->textContent = $request->input('edit_textContent');
+            // 1-  Post::findOrFail($id)->update($request->all());
+
+            // 2-
+            $post = Post::find(23);
+            $post->author = $request->input('author');
+            $post->category = $request->input('category');
+            $post->textContent = $request->input('textContent');
+            // $post->update();
+
             $post->save();
+
+            return "Agora foi?";
 
 
         }catch(Exception $e){
             Log::error($e);
         }
-
-          
     }
 
     public function destroy( $id)
